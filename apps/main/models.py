@@ -18,5 +18,15 @@ class AboutUs(models.Model):
         verbose_name_plural = 'О нас'
 
 
+class ContactUs(models.Model):
+    name = models.CharField('Имя', max_length=50)
+    email = models.EmailField('Email', max_length=50)
+    phone = models.CharField('Телефон', max_length=50)
+    message = models.TextField('Сообщение')
+
+    class Meta:
+        verbose_name = 'Контакт'
+        verbose_name_plural = 'Контакты'
+
 
 

@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, CreateView
 from .models import AboutUs
+from .forms import ContactUsForm
 # Create your views here.
 
 class HomeView(TemplateView):
@@ -13,3 +14,10 @@ class AboutUsView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['about_us'] = AboutUs.objects.first()
         return context
+
+
+class ContactUsView(CreateView):
+    template_name = 'pages/contact_us.html'
+    form_class = ContactUsForm
+    success_url = '/'
+
