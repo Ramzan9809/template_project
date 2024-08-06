@@ -1,11 +1,12 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView
+from django.views.generic import ListView, DetailView
+from .models import *
 # Create your views here.
 
 
-class CategoryView(TemplateView):
+class PostListView(ListView):
+    model = Post
     template_name = 'pages/post_list.html'
-
-class PostView(TemplateView):
-    template_name = 'pages/post_detail.html'
+    context_object_name = 'posts1'
+    queryset = Post.objects.all().order_by('-created_at')
 

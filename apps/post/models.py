@@ -13,9 +13,22 @@ class Category(models.Model):
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'
 
+
+class Tag(models.Model):
+    name = models.CharField('Название категории', max_length=100)
+    slug = models.SlugField('Слаг', max_length=100, unique=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Тег'
+        verbose_name_plural = 'Теги'
+
 class Post(models.Model):
     title = models.CharField('Название поста', max_length=200)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='posts')
+    tags = models.ManyToManyField(Tag, related_name='posts'),
     image = models.ImageField('Изображение', upload_to='posts')
     like = models.PositiveIntegerField('Количество лайков', default=0)
     text = models.TextField('Текст поста')
