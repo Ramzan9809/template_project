@@ -1,11 +1,17 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, CreateView
-from .models import AboutUs
+from .models import AboutUs, Contacts
 from .forms import ContactUsForm
+from ..post.models import Post
 # Create your views here.
 
 class HomeView(TemplateView):
     template_name = 'pages/index.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['posts'] = Post.objects.order_by('-created_at')[:3]
+        return context
+
 
 class AboutUsView(TemplateView):
     template_name = 'pages/about_us.html'
@@ -21,3 +27,7 @@ class ContactUsView(CreateView):
     form_class = ContactUsForm
     success_url = '/'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['contacts'] = Contacts.objects.first()
+        return context

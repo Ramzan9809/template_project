@@ -29,4 +29,11 @@ class ContactUs(models.Model):
         verbose_name_plural = 'Контакты'
 
 
+class Contacts(models.Model):
+    phone = models.CharField('Телефон', max_length=20)
+    email = models.EmailField('Email', max_length=50)
+    address = models.CharField('Адресс', max_length=200)
 
+    class Meta:
+        verbose_name = 'Контактс'
+        verbose_name_plural = 'Контактсы'

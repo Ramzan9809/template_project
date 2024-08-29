@@ -27,3 +27,11 @@ class ContactUsAdmin(admin.ModelAdmin):
         'phone',
         'message'
     ]
+
+@admin.register(Contacts)
+class ContactsAdmin(admin.ModelAdmin):
+    list_display = [
+        'phone',
+        'email',
+        'address'
+    ]
